@@ -32,8 +32,20 @@ rhit.main = function () {
 			const dataAmount = parseInt(button.dataset.amount);
 			const dataIsMultiplication = button.dataset.isMultiplication === "true";
 			console.log(`Amount: ${dataAmount}, Mult: ${dataIsMultiplication}`);
+			rhit.updateCounter(dataAmount, dataIsMultiplication);
 		}
+
 	}
+
 };
+
+rhit.updateCounter = function (amount, isMultiplication) {
+	if (isMultiplication) {
+		rhit.counter = rhit.counter * amount;
+	} else {
+		rhit.counter = rhit.counter + amount;
+	}
+	document.querySelector("#counterText").innerHTML = `Count = ${rhit.counter}`;
+}
 
 rhit.main();
