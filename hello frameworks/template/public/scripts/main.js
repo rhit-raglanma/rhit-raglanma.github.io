@@ -37,6 +37,12 @@ rhit.main = function () {
 
 	}
 
+	// $("#counterButtons button").click((event) => {
+	// 	const dataAmount = $(event.target).data("Amount");
+	// 	const dataIsMultiplication = $(event.target).data("isMultiplication");
+	// 	this.updateCounter(dataAmount, dataIsMultiplication)
+	// });
+
 };
 
 rhit.updateCounter = function (amount, isMultiplication) {
@@ -46,6 +52,7 @@ rhit.updateCounter = function (amount, isMultiplication) {
 		rhit.counter = rhit.counter + amount;
 	}
 	document.querySelector("#counterText").innerHTML = `Count = ${rhit.counter}`;
+	//$("counterText").html(`Count = ${rhit.counter}`)
 }
 
 rhit.main();
