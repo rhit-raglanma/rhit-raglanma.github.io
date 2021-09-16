@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 :root {
     --vertical-space: 2rem;
     --horizontal-space: 3rem;
@@ -14,6 +14,7 @@ body {
 
 h1, h2, h3 {
     line-height: 1.2;
+    font-family: 'Satisfy';
 }
 
 body#about img {height: 15em}
@@ -76,4 +77,28 @@ header, footer {
 }
 header h1, footer h1 {
     margin: 0;
+}
+
+body#portfolio ul#portfolioItems {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    list-style-type: none;
+    padding: 0;
+}
+
+body#portfolio ul#portfolioItems li {
+    flex-basis: 48%;
+    padding-right: 2%;
+}
+
+@media screen and (min-width: 25em) {
+    body#portfolio ul#portfolioItems li {
+        flex-basis: 48%;
+        padding-right: 2%;
+    }
+}
+
+body#portfolio ul#portfolioItems li img {
+    max-width: 100%;
 }
