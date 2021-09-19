@@ -2,6 +2,11 @@
 :root {
     --vertical-space: 2rem;
     --horizontal-space: 3rem;
+    --light-color: #F2F2F2;
+    --body-color: #404040;
+    --heading-color: #3d33de;
+    --contrast-color: #9b33de;
+
 }
 
 
@@ -15,6 +20,20 @@ body {
 h1, h2, h3 {
     line-height: 1.2;
     font-family: 'Satisfy';
+    color:var(--heading-color);
+}
+
+#nameHeader {
+    color:var(--light-color);
+}
+
+a {
+    color: var(--light-color);
+    text-decoration-color: var(--contrast-color);
+}
+
+a:hover {
+    color: var(--contrast-color);
 }
 
 body#about img {height: 15em}
@@ -23,11 +42,20 @@ p {
     max-width: 50em;
 }
 
+main {
+    background-color: rgba(242, 242, 242, 0.4);
+}
+
 body {
     display: grid;
     grid-template-areas: "head head" "nav nav" "main main" "foot foot";
     grid-template-columns: 1fr 4fr;
     grid-template-rows: auto auto 1fr auto;
+
+    background-color: var(--heading-color);
+    background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    color: var(--body-color);
 }
 
 @media screen and (min-width: 25em) {
