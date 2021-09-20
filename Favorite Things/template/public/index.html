@@ -12,21 +12,74 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">App Name</a>
+    <a class="navbar-brand" href="#">Favorite Things</a>
   </nav>
   <div id="mainPage" class="container page-container">
 
+    
+    <h1 style="text-align: left;">Favorite Number:</h1>
+    <div class="row justify-content-center">
+      <div>
+        
+      </div>
+      <div class="w-100"></div>
+      <div>
+        <h2 id="count">0</h2>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-4 col-md-2">
+        <button type="button" class="button btn-block" id="minus">-1</button>
+      </div>
+      <div class="col-4 col-md-2">
+        <button type="button" class="button btn-block" id="reset">RESET</button>
+      </div>
+      <div class="col-4 col-md-2">
+        <button type="button" class="button btn-block" id="plus">+1</button>
+      </div>
+
+    </div>
+    
+    <hr>
+    <h1 style="text-align: left;">Favorite Color:</h1>
+    <div class="row no-gutters justify-content-center" id="colorSection">
+      <div>
+        <!-- <h1 style="text-align: right;">Favorite Color:</h1> -->
+      </div>
+
+      <div class="w-100"></div>
+
+      <div id="outer-color-div">
+        <div id="color-div">#800000</div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-3 col-md-2">
+        <button type="button" class="button btn-block" id="blue">BLUE</button>
+      </div>
+      <div class="col-3 col-md-2">
+        <button type="button" class="button btn-block" id="green">GREEN</button>
+      </div>
+      <div class="col-3 col-md-2">
+        <button type="button" class="button btn-block" id="red">RED</button>
+      </div>
+      <div class="col-3 col-md-2">
+        <button type="button" class="button btn-block" id="purple">PURPLE</button>
+      </div>
+    </div>
+
+    <hr>
 
   </div>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
   <script src="scripts/bootstrap-material-design.js"></script>
   <script>$("body").bootstrapMaterialDesign();</script>
-  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <!-- <script src="/__/firebase/7.18.0/firebase-app.js"></script>
   <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
   <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
   <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
-  <script src="/__/firebase/init.js"></script>
+  <script src="/__/firebase/init.js"></script> -->
   <script src="scripts/main.js"></script>
 </body>
 

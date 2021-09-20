@@ -1,5 +1,19 @@
 body {
     background: #DDDDDD;
+    
+}
+
+div {
+    text-align: center;
+}
+
+.button {
+    background-color: #800000;
+    color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    border: none;
+    size: 2em;
 }
 
 .navbar {
@@ -7,6 +21,34 @@ body {
     color: white;
 }
 
+#color-div {
+    padding: 40px 60px;
+    background-color: #800000;
+    color: white;
+    margin: 20px;
+}
+
+.no-gutters>.col,
+.no-gutters>[class*=col-] {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .page-container {
     margin-top: 75px;
 }
+
+#blue {
+    background-color: blue;
+}
+#green {
+    background-color: green;
+}
+#red {
+    background-color: red;
+}
+#purple {
+    background-color: purple;
+}
+
+
