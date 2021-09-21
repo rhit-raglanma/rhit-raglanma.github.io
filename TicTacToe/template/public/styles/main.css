@@ -9,7 +9,11 @@ body {
 
 .page-container {
     margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 
 .square {
     background-color: #80000080;
@@ -18,6 +22,8 @@ body {
     font-size: 60px;
     line-height: 100px;
     font-weight: 500;
+
+    flex: 1 0 0;
 
 }
 
@@ -39,4 +45,16 @@ body {
     margin-top: 15px;
     color: white;
     margin-left: auto;
+}
+
+.my-row {
+    display: flex;
+    flex-direction: row;
+}
+
+#gameBoard {
+    height: 300px;
+    width: 300px;
+    /* margin: 20px auto; */
+
 }
