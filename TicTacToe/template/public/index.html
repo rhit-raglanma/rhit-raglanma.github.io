@@ -14,11 +14,44 @@
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">Tic Tac Toe</a>
   </nav>
+
+
   <div id="mainPage" class="container page-container">
 
     <h1 id="gameStateText" class="text-center">X's Turn</h1>
 
+    <div class="row justify-content-center">
+      <div id="gameBoard" class="col-10 col-md-6">
+        <div class="row">
+          <div class="col square b-bottom b-right">X</div>
+          <div class="col square b-bottom b-right b-left">X</div>
+          <div class="col square b-bottom b-left">X</div>
+        </div>
+
+        <div class="row">
+          <div class="col square b-bottom b-top b-right">X</div>
+          <div class="col square b-bottom b-top b-right b-left">X</div>
+          <div class="col square b-bottom b-top b-left">X</div>
+        </div>
+
+        <div class="row">
+          <div class="col square b-top b-right">X</div>
+          <div class="col square b-top b-right b-left">X</div>
+          <div class="col square b-top b-left">X</div>
+        </div>
+        <div class="row">
+          <button type="button" class="btn" id="newGameButton">New Game</button>
+        </div>
+      </div>
+      
+      
+    </div>
+
+    
+
   </div>
+
+
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
   <script src="scripts/bootstrap-material-design.js"></script>
