@@ -17,13 +17,31 @@ rhit.functionName = function () {
 	/** function body */
 };
 
-rhit.ClassName = class {
+rhit.pageController = class {
 	constructor() {
+		
+	}
+
+	UpdateView() {
+
+	}
+}
+
+rhit.Game = class {
+	constructor() {
+		
+	}
+
+	pressedButtonAtIndex(buttonIndex) {
 
 	}
 
-	methodName() {
+	getMarkAtIndex(buttonIndex) {
 
+	}
+
+	getState() {
+		return "";
 	}
 }
 
@@ -31,6 +49,7 @@ rhit.ClassName = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
+	new rhit.pageController();
 };
 
 rhit.main();
