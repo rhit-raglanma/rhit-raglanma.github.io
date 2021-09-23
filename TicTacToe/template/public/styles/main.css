@@ -64,13 +64,13 @@ body {
 
 @media (min-width: 567px) {
     #gameBoard {
-        height: 450px;
-        width: 450px;
+        height: 400px;
+        width: 400px;
     }
 
     .square {
-        font-size: 90px;
-        line-height: 140px;
+        font-size: 80px;
+        line-height: 130px;
     }
 
     #newGameButton {
@@ -80,13 +80,13 @@ body {
 
 @media (min-width: 768px) {
     #gameBoard {
-        height: 600px;
-        width: 600px;
+        height: 450px;
+        width: 450px;
     }
 
     .square {
-        font-size: 120px;
-        line-height: 180px;
+        font-size: 100px;
+        line-height: 150px;
     }
 
     #newGameButton {
