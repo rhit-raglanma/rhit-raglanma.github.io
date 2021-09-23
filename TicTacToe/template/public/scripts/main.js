@@ -20,6 +20,15 @@ rhit.functionName = function () {
 rhit.pageController = class {
 	constructor() {
 		this.game = new rhit.Game();
+
+		const squares = document.querySelectorAll(".square");
+
+		for (const square of squares) {
+			square.onclick = (event) => {
+				const buttonIndex = square.dataset.buttonIndex;
+				this.game.pressedButtonAtIndex(buttonIndex);
+			}
+		}
 	}
 
 	UpdateView() {
@@ -54,15 +63,16 @@ rhit.Game = class {
 	}
 
 	pressedButtonAtIndex(buttonIndex) {
-
+		this.board[buttonIndex] = rhit.Game.Mark.X;
+		
 	}
 
 	getMarkAtIndex(buttonIndex) {
-
+		return this.board[buttonIndex];
 	}
 
 	getState() {
-		return "";
+		return this.state;
 	}
 }
 
@@ -71,6 +81,16 @@ rhit.Game = class {
 rhit.main = function () {
 	console.log("Ready");
 	new rhit.pageController();
+
+	// const myGame = new rhit.Game();
+	// console.log('this.board = ', myGame.board);
+	// console.log('this.state = ', myGame.state);
+
+	// myGame.pressedButtonAtIndex(4);
+	// console.log('this.board = ', myGame.board);
+	// console.log('this.state = ', myGame.state);
+
+	
 };
 
 rhit.main();
