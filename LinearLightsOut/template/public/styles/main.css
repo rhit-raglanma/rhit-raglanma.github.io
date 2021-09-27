@@ -10,3 +10,59 @@ body {
 .page-container {
     margin-top: 75px;
 }
+
+.my-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+.button {
+    margin: 5px;
+    width: 4rem;
+    height: 5rem;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #444;
+    color: #fff;
+}
+
+#newGameButton {
+    background-color: #800000;
+    justify-content: right;
+    width: 10rem;
+    height: 4rem;
+    margin-left: 60%;
+    
+}
+
+@media (min-width: 567px) {
+    .button {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 45px;
+    }
+    #newGameButton {
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width: 992px) {
+    .button {
+        font-size: 30px;
+    }
+    h1 {
+        font-size: 60px;
+    }
+    #newGameButton {
+        font-size: 20px;
+    }
+    
+}
