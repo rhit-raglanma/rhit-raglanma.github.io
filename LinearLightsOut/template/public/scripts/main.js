@@ -125,7 +125,7 @@ rhit.pageController = class {
 /* Main */
 /** function and class syntax examples */
 rhit.main = function () {
-	console.log("Ready");
+	//console.log("Ready");
 	new rhit.pageController();
 };
 
