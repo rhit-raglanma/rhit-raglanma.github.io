@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 :root {
     --vertical-space: 2rem;
     --horizontal-space: 3rem;
     --light-color: #F2F2F2;
-    --body-color: #404040;
+    --body-color: #202020;
     --heading-color: #3d33de;
     --contrast-color: #9b33de;
 
@@ -15,6 +16,7 @@ body {
     /* padding-left: 4em; */
     font-size: 18px;
     line-height: 1.5;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 h1, h2, h3 {
@@ -24,12 +26,13 @@ h1, h2, h3 {
 }
 
 #nameHeader {
-    color:var(--light-color);
+    color:var(--heading-color);
 }
 
 a {
-    color: var(--light-color);
+    color: var(--body-color);
     text-decoration-color: var(--contrast-color);
+    font-size: 1.3em;
 }
 
 a:hover {
@@ -43,7 +46,7 @@ p {
 }
 
 main {
-    background-color: rgba(242, 242, 242, 0.4);
+    /* background-color: rgba(61, 51, 222, 0.4); */
 }
 
 body {
@@ -52,7 +55,7 @@ body {
     grid-template-columns: 1fr 4fr;
     grid-template-rows: auto auto 1fr auto;
 
-    background-color: var(--heading-color);
+    background-color: var(--light-color);
     background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
     color: var(--body-color);
@@ -60,7 +63,7 @@ body {
 
 @media screen and (min-width: 25em) {
     body {
-        grid-template-areas: "head head" "nav main" "foot foot";
+        grid-template-areas: "head main" "nav main" "foot foot";
         grid-template-columns: 1fr 4fr;
         grid-template-rows: auto 1fr auto;
     }
