@@ -124,7 +124,7 @@ rhit.ViewController = class {
         //TODO add more view control code here
 
         document.getElementById("west").onclick = (event) => {
-            this.timeZoneManager.zoneIndex--;
+            this.timeZoneManager.zoneIndex = (26 + (this.timeZoneManager.zoneIndex - 1)) % 26;
             //console.log(this.timeZoneManager.zoneIndex);
             this.updateView();
         }
@@ -134,7 +134,7 @@ rhit.ViewController = class {
             this.updateView();
         }
         document.getElementById("east").onclick = (event) => {
-            this.timeZoneManager.zoneIndex++;
+            this.timeZoneManager.zoneIndex = (26 + (this.timeZoneManager.zoneIndex + 1)) % 26;
             //console.log(this.timeZoneManager.zoneIndex);
             this.updateView();
         }
