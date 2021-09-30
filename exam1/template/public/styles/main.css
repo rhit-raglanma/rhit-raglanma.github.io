@@ -1,5 +1,6 @@
 body {
     background: #DDDDDD;
+    color: #800000;
 }
 
 .navbar {
@@ -12,13 +13,14 @@ body {
 }
 
 div {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 button {
-    margin: 10px 20px;
+    margin: 10px 200px;
     border-radius: 2px;
-    background-color: lightblue;
+    background-color: blue;
+    color: white;
     border: 0px;
     width: 8rem;
     height: 4rem;
@@ -26,7 +28,8 @@ button {
 }
 
 .gButton {
-    background-color: forestgreen;
+    background-color: green;
+    
     width: 6rem;
     height: 3rem;
 }
@@ -40,6 +43,8 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    height: 5rem;
     
     background-color: #fff;
     margin-bottom: 10px;
@@ -47,6 +52,33 @@ button {
 
 .lower-row {
     background-color: #DDDDDD;
+    height: 3rem;
 }
 
+#gdiv {
+    height: 15rem;
+}
 
+@media (min-width: 550px) {
+    .bButton {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    #gdiv {
+        height: 10rem;
+    }
+
+}
+
+@media (min-width: 793px) {
+    .bButton {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    #gdiv {
+        height: 5rem;
+    }
+
+}

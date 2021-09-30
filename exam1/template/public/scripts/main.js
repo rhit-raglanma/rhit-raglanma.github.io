@@ -65,6 +65,10 @@ rhit.getTimeZoneValue = function ( offset) {
 rhit.TimezoneManager = class {
 	constructor() {
         //TODO initialize values in class
+        this.zoneIndex = 7;
+        this.weekday = true;
+        this.minute = true;
+        this.second = true;
 	}
 
     //TODO - hint: at some point you will need to shift the current offset +1 or -1 to shift time zones
@@ -76,13 +80,35 @@ rhit.TimezoneManager = class {
 
     //TODO  currently hardcoded to always be Indiana (7)
 	getCurrentLocationString(){
-		return `Currently in ${rhit.getTimeZoneLabel( 7 ) } with local time:`;
+		return `Currently in ${rhit.getTimeZoneLabel(this.zoneIndex) } with local time:`;
 	}
 
     //TODO  currently hardcoded to always be Indiana (7) change to be whatever timezone we should be
 	getCurrentDateString(){
-        let options = { weekday:'long', hour:'numeric', minute:'numeric',second:'numeric', timeZone:rhit.getTimeZoneValue( 7 )  };
-		this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+
+        
+
+        if (this.weekday && this.minute && this.second) {
+            let options = {weekday: 'long', hour:'numeric', minute:'numeric',second:'numeric', timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        } else if (this.weekday && this.minute) {
+            let options = {weekday: 'long', hour:'numeric', minute:'numeric', timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        } else if (this.weekday) {
+            let options = {weekday: 'long', hour:'numeric', timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        } else if (this.minute && this.second) {
+            let options = {hour:'numeric', minute:'numeric',second:'numeric', timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        } else  if (this.minute) {
+            let options = {hour:'numeric', minute:'numeric',timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        } else {
+            let options = {hour:'numeric', timeZone:rhit.getTimeZoneValue(this.zoneIndex)  };
+            this.currentLocalDate = new Date().toLocaleTimeString('en-US', options);
+        }
+        
+		
 		return this.currentLocalDate;
 
 	}
@@ -97,6 +123,53 @@ rhit.ViewController = class {
 		
         //TODO add more view control code here
 
+        document.getElementById("west").onclick = (event) => {
+            this.timeZoneManager.zoneIndex--;
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
+        document.getElementById("home").onclick = (event) => {
+            this.timeZoneManager.zoneIndex = 7;
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
+        document.getElementById("east").onclick = (event) => {
+            this.timeZoneManager.zoneIndex++;
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
+
+        const wButton = document.getElementById("weekButton")
+        wButton.onclick = (event) => {
+            this.timeZoneManager.weekday = !this.timeZoneManager.weekday;
+            if (!this.timeZoneManager.weekday || !this.timeZoneManager.minute) wButton.style.background = "grey";
+                else wButton.style.background = "green";
+
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
+        const sButton = document.getElementById("sButton")
+        sButton.onclick = (event) => {
+            this.timeZoneManager.second = !this.timeZoneManager.second;
+            if (!this.timeZoneManager.second || !this.timeZoneManager.minute) sButton.style.background = "grey";
+                else sButton.style.background = "green";
+
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
+
+        const mButton = document.getElementById("mButton")
+        mButton.onclick = (event) => {
+            this.timeZoneManager.minute = !this.timeZoneManager.minute;
+            if (this.timeZoneManager.minute) mButton.style.background = "green"; 
+                else mButton.style.background = "grey";
+
+            if (!this.timeZoneManager.second || !this.timeZoneManager.minute) sButton.style.background = "grey";
+                else sButton.style.background = "green";
+
+            //console.log(this.timeZoneManager.zoneIndex);
+            this.updateView();
+        }
 
 		this.updateView();
 	}
@@ -105,6 +178,9 @@ rhit.ViewController = class {
 		//TODO update view not just print to the console
 		console.log(  this.timeZoneManager.getCurrentLocationString() );
 		console.log(  this.timeZoneManager.getCurrentDateString() );
+
+        document.getElementById("time").innerText = this.timeZoneManager.getCurrentLocationString();
+        document.getElementById("number").innerText = this.timeZoneManager.getCurrentDateString();
 
 		
 	}
