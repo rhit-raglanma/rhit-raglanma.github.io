@@ -10,3 +10,43 @@ body {
 .page-container {
     margin-top: 75px;
 }
+
+div {
+    font-size: 2rem;
+}
+
+button {
+    margin: 10px 20px;
+    border-radius: 2px;
+    background-color: lightblue;
+    border: 0px;
+    width: 8rem;
+    height: 4rem;
+    font-size: 1rem;
+}
+
+.gButton {
+    background-color: forestgreen;
+    width: 6rem;
+    height: 3rem;
+}
+
+#weekButton {
+    width: 7rem;
+}
+
+.my-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.lower-row {
+    background-color: #DDDDDD;
+}
+
+
