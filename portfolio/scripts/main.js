@@ -7,3 +7,4 @@ btn.onclick = (event) => {
         behavior: "smooth"
     });
 }
+
