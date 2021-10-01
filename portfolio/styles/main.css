@@ -173,3 +173,18 @@ h3 {
 li > p {
     margin-right: 2rem;
 }
+
+#scrollUp {
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 5px;
+    border-radius: 3rem;
+    border: 0px;
+    background-color: var(--contrast-color);
+    color: var(--light-color);
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
