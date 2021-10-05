@@ -10,3 +10,12 @@ body {
 .page-container {
     margin-top: 75px;
 }
+
+#fab {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    background-color: #800000;
+    color: white;
+
+}
