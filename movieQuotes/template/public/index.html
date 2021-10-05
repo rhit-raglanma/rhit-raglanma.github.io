@@ -25,7 +25,8 @@
     </button>
 
     <!-- modal -->
-    <div class="modal fade" id="addQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="Add quote dialog" aria-hidden="true">
+    <div class="modal fade" id="addQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="Add quote dialog"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -35,7 +36,19 @@
             </button> -->
           </div>
           <div class="modal-body">
-            ... form goes here ...
+
+            <!-- Name input -->
+            <div class="form-outline mb-4 bmd-form-group">
+              <label class="bmd-label-floating" for="inputQuote">Quote</label>
+              <input type="text" id="inputQuote" class="form-control" />
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4 bmd-form-group">
+              <label class="bmd-label-floating" for="inputMovie">Movie</label>
+              <input type="text" id="inputMovie" class="form-control" />
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
