@@ -22,6 +22,13 @@ rhit.functionName = function () {
 	/** function body */
 };
 
+function htmlToElement(html) {
+	var template = document.createElement('template');
+	html = html.trim();
+	template.innerHTML = html;
+	return template.content.firstChild;
+}
+
 rhit.ListPageController = class {
 	constructor() {
 		document.querySelector("#submitAddQuote").onclick = (event) => {
@@ -45,9 +52,33 @@ rhit.ListPageController = class {
 		rhit.fbMovieQuotesManager.beginListening(this.updateList.bind(this));
 	}
 
+	_createCard(movieQuote) {
+		return htmlToElement(`<div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${movieQuote.quote}</h5>
+          <p class="card-text">${movieQuote.movie}</p>
+        </div>
+      </div>`);
+	}
+
 	updateList() {
 		console.log("update list");
 		console.log(rhit.fbMovieQuotesManager.length);
+
+		const newList = htmlToElement('<div id="quoteListContainer"></div>');
+	
+		for (let i = 0; i < rhit.fbMovieQuotesManager.length; i++) {
+			const mq = rhit.fbMovieQuotesManager.getMovieQuoteAtIndex(i);
+			const newCard = this._createCard(mq);
+			newList.appendChild(newCard);
+		}
+
+		const oldList = document.querySelector("#quoteListContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+
+		oldList.parentElement.appendChild(newList);
+	
 	}
 }
 
@@ -102,6 +133,7 @@ rhit.FbMovieQuotesManager = class {
 		return this._documentSnapshots.length;
 	}
 	getMovieQuoteAtIndex(index) {
+		const docSnapshot = this._documentSnapshots[index];
 		const mq = new rhit.MovieQuote(docSnapshot.id,
 			docSnapshot.get(rhit.FB_KEY_QUOTE),
 			docSnapshot.get(rhit.FB_KEY_MOVIE));
