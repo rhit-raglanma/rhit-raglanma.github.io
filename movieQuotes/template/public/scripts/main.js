@@ -158,8 +158,12 @@ rhit.FbMovieQuotesManager = class {
 rhit.DetailPageController = class {
 	constructor() {
 		console.log("detail");
+		rhit.fbSingleQuoteManager.beginListening(this.updateView.bind(this));
 	}
 	updateView() {
+		console.log("update view");
+		document.querySelector(".card-title").innerHTML = rhit.fbSingleQuoteManager.quote;
+		document.querySelector(".card-text").innerHTML = rhit.fbSingleQuoteManager.movie;
 	}
 }
 
@@ -172,11 +176,38 @@ rhit.FbSingleQuoteManager = class {
 		console.log("listening");
 	}
 	beginListening(changeListener) {
+
+		this._unsubscribe = this._ref.onSnapshot((doc) => {
+			if (doc.exists) {
+				console.log("Document data:", doc.data());
+				this._documentSnapshot = doc;
+				changeListener();
+			} else {
+				console.log("no such doc");
+			}
+		})
+
+		
+
+
+
+
 	}
 	stopListening() {
 		this._unsubscribe();
 	}
-	update(quote, movie) { }
+	update(quote, movie) { 
+
+	}
+
+	get quote() {
+		return this._documentSnapshot.get(rhit.FB_KEY_QUOTE);
+	}
+
+	get movie() {
+		return this._documentSnapshot.get(rhit.FB_KEY_MOVIE);
+	}
+
 	delete() { }
 }
 
