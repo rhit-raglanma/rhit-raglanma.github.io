@@ -35,3 +35,7 @@ body {
     display: block;
     text-overflow: ellipsis;
 }
+
+.dropdown-menu {
+    left: -128px;
+}
