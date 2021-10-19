@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
   <link rel="stylesheet" href="styles/main.css">
   <title>App Name</title>
 </head>
@@ -13,8 +14,30 @@
 <body>
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">App Name</a>
+    <button type="button" id="signOutButton" class="btn btn-outline text-light waves-effect">Sign out</button>
   </nav>
   <div id="mainPage" class="container page-container">
+
+    <!-- Default form login -->
+
+
+    <!-- <p class="h4 mb-4">Sign in</p> -->
+
+    <!-- Email -->
+    <input type="email" id="inputEmail" class="form-control mb-4" placeholder="E-mail">
+
+    <!-- Password -->
+    <input type="password" id="inputPassword" class="form-control mb-4" placeholder="Password">
+
+    <button type="button" id="createAccountButton" class="btn btn-outline-primary waves-effect">Create Account</button>
+    <button type="button" id="loginButton" class="btn btn-outline-primary waves-effect">Login to existing
+      account</button>
+
+    <hr>
+    <button type="button" id="anonymousAuth" class="btn btn-outline-primary waves-effect">Use Guest Mode</button>
+
+    <hr>
+    <div id="firebaseui-auth-container"></div>
 
 
   </div>
@@ -26,6 +49,7 @@
   <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
   <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
   <script src="/__/firebase/init.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
   <script src="scripts/main.js"></script>
 </body>
 
