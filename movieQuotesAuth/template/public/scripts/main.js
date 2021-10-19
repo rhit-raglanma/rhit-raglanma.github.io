@@ -16,6 +16,7 @@ rhit.FB_KEY_MOVIE = "movie";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
+rhit.FbAuthManager = null;
 
 /** function and class syntax examples */
 rhit.functionName = function () {
@@ -182,8 +183,8 @@ rhit.DetailPageController = class {
 
 		document.querySelector("#submitDeleteQuote").onclick = (event) => {
 
-			
-			rhit.fbSingleQuoteManager.delete().then(function() {
+
+			rhit.fbSingleQuoteManager.delete().then(function () {
 				console.log("deleted");
 				window.location.href = "/";
 			}).catch(function (error) {
@@ -258,11 +259,11 @@ rhit.FbSingleQuoteManager = class {
 		return this._documentSnapshot.get(rhit.FB_KEY_MOVIE);
 	}
 
-	delete() { 
+	delete() {
 
 		return this._ref.delete();
 		// .then(function() {
-			
+
 		// }).catch(function (error) {
 		// 	console.log("error deleting document");
 		// });
@@ -290,7 +291,45 @@ rhit.FbSingleQuoteManager = class {
 
 /* Main */
 /** function and class syntax examples */
+
+rhit.LoginPageController = class {
+	constructor() {
+		document.querySelector("#rosefireButton").onclick = (event) => {
+			rhit.FbAuthManager.signIn();
+		}
+	}
+}
+
+rhit.FbAuthManager = class {
+	constructor() {
+		this._user = null;
+		console.log("you made the auth manager");
+	}
+	beginListening(changeListener) {
+
+	}
+	signIn() {
+		
+	}
+	signOut() {
+
+	}
+	get isSignedIn() {
+
+	}
+	get uid() {
+
+	}
+}
+
+
+
 rhit.main = function () {
+
+	rhit.FbAuthManager = new rhit.FbAuthManager();
+	rhit.FbAuthManager.beginListening(() => {
+		console.log("auth change callback fired");
+	});
 
 	if (document.querySelector("#listPage")) {
 		console.log("list page");
@@ -319,6 +358,12 @@ rhit.main = function () {
 		rhit.fbSingleQuoteManager = new rhit.FbSingleQuoteManager(movieQuoteId);
 		new rhit.DetailPageController();
 
+	}
+
+	if (document.querySelector("#loginPage")) {
+		console.log("login page");
+		
+		new rhit.LoginPageController();
 
 	}
 
