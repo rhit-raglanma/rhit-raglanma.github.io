@@ -307,9 +307,9 @@ rhit.FbAuthManager = class {
 	}
 	beginListening(changeListener) {
 
-		
 
-		
+
+
 
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
@@ -329,6 +329,34 @@ rhit.FbAuthManager = class {
 
 	}
 	signIn() {
+
+		// Please note this needs to be the result of a user interaction
+		// (like a button click) otherwise it will get blocked as a popup
+		Rosefire.signIn("01e3b1d8-21b0-470b-bce5-6480db25dd50", (err, rfUser) => {
+			if (err) {
+				console.log("Rosefire error!", err);
+				return;
+			}
+			console.log("Rosefire success!", rfUser);
+
+			// TODO: Use the rfUser.token with your server.
+
+			firebase.auth().signInWithCustomToken(rfUser.token)
+				.then((userCredential) => {
+					// Signed in
+					var user = userCredential.user;
+					// ...
+				})
+				.catch((error) => {
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					console.log("error", errorCode, errorMessage);
+				});
+		});
+
+
+
+
 
 	}
 	signOut() {
