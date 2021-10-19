@@ -307,18 +307,38 @@ rhit.FbAuthManager = class {
 	}
 	beginListening(changeListener) {
 
+		
+
+		
+
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				// User is signed in, see docs for a list of available properties
+				// https://firebase.google.com/docs/reference/js/firebase.User
+				this._user = user;
+				changeListener();
+				console.log("user is signed in", uid);
+
+				// ...
+			} else {
+				console.log("no user signed in");
+				// User is signed out
+				// ...
+			}
+		});
+
 	}
 	signIn() {
-		
+
 	}
 	signOut() {
 
 	}
 	get isSignedIn() {
-
+		return !!this._user;
 	}
 	get uid() {
-
+		return this._user.uid;
 	}
 }
 
@@ -329,6 +349,8 @@ rhit.main = function () {
 	rhit.FbAuthManager = new rhit.FbAuthManager();
 	rhit.FbAuthManager.beginListening(() => {
 		console.log("auth change callback fired");
+
+
 	});
 
 	if (document.querySelector("#listPage")) {
@@ -362,7 +384,7 @@ rhit.main = function () {
 
 	if (document.querySelector("#loginPage")) {
 		console.log("login page");
-		
+
 		new rhit.LoginPageController();
 
 	}
