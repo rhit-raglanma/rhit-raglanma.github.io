@@ -341,17 +341,14 @@ rhit.FbAuthManager = class {
 
 			// TODO: Use the rfUser.token with your server.
 
-			firebase.auth().signInWithCustomToken(rfUser.token)
-				.then((userCredential) => {
-					// Signed in
-					var user = userCredential.user;
-					// ...
-				})
-				.catch((error) => {
-					var errorCode = error.code;
-					var errorMessage = error.message;
-					console.log("error", errorCode, errorMessage);
-				});
+			firebase.auth().signInWithCustomToken(rfUser.token).catch((error) => {
+				if (error.code === 'auth/invalid-custom-token') {
+					console.log("The token you provided is not valid.");
+				} else {
+					console.log("signInWithCustomToken error", error.message);
+				}
+			}); // Note: Success should be handled by an onAuthStateChanged listener.
+
 		});
 
 
