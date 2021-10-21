@@ -18,15 +18,16 @@
     <div class="dropdown">
 
       <!--Trigger-->
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <i class="material-icons">more_vert</i>
       </button>
 
       <!--Menu-->
       <div class="dropdown-menu dropdown-primary">
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editQuoteDialog"><i class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit</a>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteQuoteDialog"><i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</a>
+        <a class="dropdown-item" id="menuEdit" href="#" data-toggle="modal" data-target="#editQuoteDialog"><i class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit</a>
+        <a class="dropdown-item" id="menuDelete" href="#" data-toggle="modal" data-target="#deleteQuoteDialog"><i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</a>
+        <a class="dropdown-item" id="menuSignOut" type="button"><i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Sign Out</a>
       </div>
     </div>
     <!--/Dropdown primary-->

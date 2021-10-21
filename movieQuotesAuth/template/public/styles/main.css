@@ -56,4 +56,9 @@ body {
     border-radius: 5px;
 }
 
+#menuEdit,
+#menuDelete {
+    display: none;
+}
+
 
