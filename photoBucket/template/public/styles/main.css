@@ -67,9 +67,10 @@ body {
     left: -128px;
 }
 
-.pin {
+#picPin {
     /* display: inline-block;
-    width: auto;
+    
     align-content: center; */
+    
 
 }
