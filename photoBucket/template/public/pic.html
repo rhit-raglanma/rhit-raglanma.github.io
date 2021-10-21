@@ -7,80 +7,107 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <title>Photo Bucket</title>
+  <title>Photo</title>
 </head>
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">Photo Bucket</a>
+    <a class="navbar-brand" href="/">Photo</a>
+
+    <!--Dropdown primary-->
+    <div class="dropdown">
+
+      <!--Trigger-->
+      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <!--Menu-->
+      <div class="dropdown-menu dropdown-primary">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editUrlDialog"><i
+            class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit</a>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteUrlDialog"><i
+            class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</a>
+      </div>
+    </div>
+    <!--/Dropdown primary-->
+
   </nav>
   <div id="mainPage" class="container page-container">
 
 
 
-    <div id="listPage" class="container page-container">
+    <div id="detailPage" class="container page-container">
 
 
 
-      <div id="columns">
-        <div class="pin" id="7FjmtcF1qX4xRMWD2um3">
-          <img src="" alt="">
-          <p class="caption"></p>
+
+      <div class="pin" id="">
+        <img src="" alt="" class="detail-image">
+        <p class="caption">Loading...</p>
+      </div>
+
+
+      <!-- modal -->
+      <div class="modal fade" id="editUrlDialog" tabindex="-1" role="dialog" aria-labelledby="Edit url dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit this Picture</h5>
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+            </div>
+            <div class="modal-body">
+
+              <!-- url input -->
+              <div class="form-outline mb-4 bmd-form-group">
+                <label class="" for="inputUrl">URL</label>
+                <input type="text" id="inputUrl" class="form-control" placeholder="" />
+              </div>
+
+              <!-- caption input -->
+              <div class="form-outline mb-4 bmd-form-group">
+                <label class="" for="inputCaption">Caption</label>
+                <input type="text" id="inputCaption" class="form-control" placeholder="" />
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitEditURL">UPDATE</button>
+            </div>
+          </div>
         </div>
       </div>
-        <!-- <div class="pin" id="DPXnBWfEUXJa9q2w9YtZ">
-          <img src="https://fisherds-moviequoteusers.web.app/images/rose_logo.png" alt="Rose-Hulman logo">
-          <p class="caption">Rose-Hulman logo</p>
-        </div>
-        <div class="pin" id="HXVidTpNvdWesDXMH0Bu">
-          <img src="https://www.collegeconsensus.com/wp-content/uploads/2016/12/Rose-Hulman-Institute-of-Technology-1024x427.jpeg" alt="Front drive">
-          <p class="caption">Front drive</p>
-        </div>
-        <div class="pin" id="tni4sySOgE33EGkETz3D">
-          <img src="https://www.rose-hulman.edu/admissions-and-aid/early-planning/operation-catapult/_assets/images/Content-Container-Region-One-Column/Catapult-CCR-1C-Jul-15-Catapult_Catapult_BS1-1.jpg" alt="Catapult walk on water">
-          <p class="caption">Catapult walk on water</p>
-        </div>
-        <div class="pin" id="shTHWfQOPIxXAnEKwCUU">
-          <img
-            src="https://www.usnews.com/dims4/USNEWS/29f4d3c/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2Ff3%2Fff1c3c204b89801905a1f7226db9c9%2Fcollege-photo_34374.jpg"
-            alt="Lake">
-          <p class="caption">Lake</p>
-        </div> -->
-      
+
     </div>
 
-    <button id="fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#addPicDialog">
-      <i class="material-icons">add</i>
-    </button>
 
-    <div class="modal fade" id="addPicDialog" tabindex="-1" role="dialog" aria-labelledby="Add pic dialog"
+
+
+
+
+    <div class="modal fade" id="deleteUrlDialog" tabindex="-1" role="dialog" aria-labelledby="Delete url dialog"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Picture</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Delete this Picture</h5>
             <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button> -->
           </div>
           <div class="modal-body">
 
-            <!-- Name input -->
-            <div class="form-outline mb-4 bmd-form-group">
-              <label class="bmd-label-floating" for="inputURL">URL</label>
-              <input type="text" id="inputURL" class="form-control" />
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4 bmd-form-group">
-              <label class="bmd-label-floating" for="inputCaption">Caption</label>
-              <input type="text" id="inputCaption" class="form-control" />
-            </div>
+            Are you sure you want to delete this Picture?
 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitAddPic">CREATE</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitDeleteUrl">DELETE</button>
           </div>
         </div>
       </div>

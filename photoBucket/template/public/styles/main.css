@@ -62,3 +62,7 @@ body {
     opacity: 0.8;
     transform: translateY(2px);
 }
+
+.dropdown-menu {
+    left: -128px;
+}
