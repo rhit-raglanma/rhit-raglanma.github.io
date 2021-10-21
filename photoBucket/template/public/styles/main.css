@@ -66,3 +66,10 @@ body {
 .dropdown-menu {
     left: -128px;
 }
+
+.pin {
+    /* display: inline-block;
+    width: auto;
+    align-content: center; */
+
+}

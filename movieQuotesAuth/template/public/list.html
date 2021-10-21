@@ -13,7 +13,28 @@
 <body>
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">My Movie Quotes</a>
+
+    <div class="dropdown">
+
+      <!--Trigger-->
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <!--Menu-->
+      <div class="dropdown-menu dropdown-primary">
+        <a class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">people</i>&nbsp;&nbsp;&nbsp;Show All Quotes</a>
+        <a class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;Show My Quotes</a>
+        <a class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Log Out</a>
+      </div>
+    </div>
+
   </nav>
+
+
+
+
   <div id="listPage" class="container page-container">
 
     <!-- <a class="btn btn-primary btn-lg btn-floating" style="background-color: #ac2bac;" href="#!" role="button">
@@ -80,6 +101,7 @@
   <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
   <script src="/__/firebase/init.js"></script>
   <script src="scripts/main.js"></script>
+
 </body>
 
 </html>

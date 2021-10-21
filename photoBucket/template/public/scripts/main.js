@@ -202,7 +202,7 @@ rhit.DetailPageController = class {
 		console.log("update view");
 		// document.querySelector(".detail-image").innerHTML = rhit.fbSinglePicManager.pic;
 		// document.querySelector(".caption").innerHTML = rhit.fbSinglePicManager.caption;
-		document.querySelector(".pin").innerHTML = `<img src="${rhit.fbSinglePicManager.pic}" alt="${rhit.fbSinglePicManager.caption}">
+		document.querySelector(".pin").innerHTML = `<img src="${rhit.fbSinglePicManager.pic}" alt="${rhit.fbSinglePicManager.caption} class=".img-fluid">
 		<p class="caption">${rhit.fbSinglePicManager.caption}</p>`;
 	}
 }

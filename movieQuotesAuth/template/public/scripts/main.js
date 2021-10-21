@@ -307,24 +307,23 @@ rhit.FbAuthManager = class {
 	}
 	beginListening(changeListener) {
 
-
-
-
-
 		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				// User is signed in, see docs for a list of available properties
-				// https://firebase.google.com/docs/reference/js/firebase.User
-				this._user = user;
-				changeListener();
-				console.log("user is signed in", uid);
+			// if (user) {
+			// 	// User is signed in, see docs for a list of available properties
+			// 	// https://firebase.google.com/docs/reference/js/firebase.User
+			// 	this._user = user;
+			// 	changeListener();
+			// 	//console.log("user is signed in", this._user.uid);
 
-				// ...
-			} else {
-				console.log("no user signed in");
-				// User is signed out
-				// ...
-			}
+			// 	// ...
+			// } else {
+			// 	console.log("no user signed in");
+			// 	// User is signed out
+			// 	// ...
+			// }
+
+			this._user = user;
+			changeListener();
 		});
 
 	}
@@ -357,7 +356,9 @@ rhit.FbAuthManager = class {
 
 	}
 	signOut() {
-
+		firebase.auth().signOut().catch((error) => {
+			console.log("Sign out error");
+		});
 	}
 	get isSignedIn() {
 		return !!this._user;
@@ -367,17 +368,20 @@ rhit.FbAuthManager = class {
 	}
 }
 
+rhit.checkForRedirects = function () {
+	if (document.querySelector("#loginPage") && rhit.FbAuthManager.isSignedIn) {
+		window.location.href = "/list.html";
+	}
 
+	// console.log(!document.querySelector("#loginPage"));
+	// console.log("runs");
 
-rhit.main = function () {
+	if (!document.querySelector("#loginPage") && !rhit.FbAuthManager.isSignedIn) {
+		window.location.href = "/";
+	}
+}
 
-	rhit.FbAuthManager = new rhit.FbAuthManager();
-	rhit.FbAuthManager.beginListening(() => {
-		console.log("auth change callback fired");
-
-
-	});
-
+rhit.initializePage = function () {
 	if (document.querySelector("#listPage")) {
 		console.log("list page");
 		rhit.fbMovieQuotesManager = new rhit.FbMovieQuotesManager();
@@ -413,6 +417,21 @@ rhit.main = function () {
 		new rhit.LoginPageController();
 
 	}
+}
+
+
+rhit.main = function () {
+
+	rhit.FbAuthManager = new rhit.FbAuthManager();
+	rhit.FbAuthManager.beginListening(() => {
+		console.log("auth change callback fired");
+
+		rhit.checkForRedirects();
+		rhit.initializePage();
+
+	});
+
+
 
 	// const ref = firebase.firestore().collection("MovieQuotes");
 	// ref.onSnapshot((querySnapshot) => {
