@@ -33,8 +33,7 @@ rhit.ListPageController = class {
 
 			const pic = document.querySelector("#inputURL").value;
 			const caption = document.querySelector("#inputCaption").value;
-			// console.log(quote);
-			// console.log(movie);
+			
 			rhit.fbPicsManager.add(pic, caption);
 		}
 
@@ -104,8 +103,7 @@ rhit.FbPicsManager = class {
 		this._unsubscribe;
 	}
 	add(pic, caption) {
-		// console.log(quote);
-		// console.log(movie);
+		
 
 		this._ref.add({
 			[rhit.FB_KEY_URL]: pic,
@@ -137,7 +135,7 @@ rhit.FbPicsManager = class {
 		this._unsubscribe();
 	}
 
-	update(id, quote, movie) { }
+	update(id, pic, caption) { }
 	delete(id) { }
 
 	get length() {
@@ -165,8 +163,7 @@ rhit.DetailPageController = class {
 
 			const url = document.querySelector("#inputUrl").value;
 			const caption = document.querySelector("#inputCaption").value;
-			// console.log(quote);
-			// console.log(movie);
+			
 			rhit.fbSinglePicManager.update(url, caption);
 		}
 
