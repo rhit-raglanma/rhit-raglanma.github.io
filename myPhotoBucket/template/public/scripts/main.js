@@ -47,6 +47,12 @@ rhit.ListPageController = class {
 			document.querySelector("#inputURL").focus();
 		})
 
+		document.querySelector("#menuShowMyPictures").addEventListener("click", (event) => {
+			console.log("my");
+
+			window.location.href = `/list.html?uid=${rhit.FbAuthManager.uid}`;
+		});
+
 		//start listening
 		rhit.fbPicsManager.beginListening(this.updateList.bind(this));
 	}
