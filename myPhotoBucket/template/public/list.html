@@ -13,6 +13,23 @@
 <body>
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">My Photo Bucket</a>
+
+    <div class="dropdown">
+
+      <!--Trigger-->
+      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <!--Menu-->
+      <div class="dropdown-menu dropdown-primary">
+        <a id="menuShowAllPictures" class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">people</i>&nbsp;&nbsp;&nbsp;Show All Photos</a>
+        <a id="menuShowMyPictures" class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;Show My Photos</a>
+        <a id="menuSignOut" class="dropdown-item" href="#" data-toggle="modal"><i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Log Out</a>
+      </div>
+    </div>
+
   </nav>
   <div id="mainPage" class="container page-container">
 

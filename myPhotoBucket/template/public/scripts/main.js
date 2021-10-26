@@ -15,6 +15,7 @@ rhit.FB_COLLECTION_PICS = "Pic";
 rhit.FB_KEY_CAPTION = "caption";
 rhit.FB_KEY_URL = "imageUrl";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
+rhit.FB_KEY_AUTHOR = "author";
 rhit.fbPicsManager = null;
 rhit.fbSinglePicManager = null;
 rhit.FbAuthManager = null;
@@ -109,6 +110,7 @@ rhit.FbPicsManager = class {
 		this._ref.add({
 			[rhit.FB_KEY_URL]: pic,
 			[rhit.FB_KEY_CAPTION]: caption,
+			[rhit.FB_KEY_AUTHOR]: rhit.FbAuthManager.uid,
 			[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 		})
 			.then(function (docRef) {
