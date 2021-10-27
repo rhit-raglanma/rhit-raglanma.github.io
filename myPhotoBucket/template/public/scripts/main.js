@@ -18,7 +18,7 @@ rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.FB_KEY_AUTHOR = "author";
 rhit.fbPicsManager = null;
 rhit.fbSinglePicManager = null;
-rhit.FbAuthManager = null;
+rhit.fbAuthManager = null;
 
 // functions
 function htmlToElement(html) {
@@ -48,10 +48,20 @@ rhit.ListPageController = class {
 		})
 
 		document.querySelector("#menuShowMyPictures").addEventListener("click", (event) => {
-			console.log("my");
+			
 
-			window.location.href = `/list.html?uid=${rhit.FbAuthManager.uid}`;
+			window.location.href = `/list.html?uid=${rhit.fbAuthManager.uid}`;
 		});
+
+		document.querySelector("#menuShowAllPictures").addEventListener("click", (event) => {
+			
+
+			window.location.href = `/list.html`;
+		});
+
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			rhit.fbAuthManager.signOut();
+		}
 
 		//start listening
 		rhit.fbPicsManager.beginListening(this.updateList.bind(this));
@@ -105,7 +115,9 @@ rhit.Pic = class {
 }
 
 rhit.FbPicsManager = class {
-	constructor() {
+	constructor(uid) {
+		console.log("uid");
+		this._uid = uid;
 		this._documentSnapshots = [];
 		this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_PICS);
 		this._unsubscribe;
@@ -116,7 +128,7 @@ rhit.FbPicsManager = class {
 		this._ref.add({
 			[rhit.FB_KEY_URL]: pic,
 			[rhit.FB_KEY_CAPTION]: caption,
-			[rhit.FB_KEY_AUTHOR]: rhit.FbAuthManager.uid,
+			[rhit.FB_KEY_AUTHOR]: rhit.fbAuthManager.uid,
 			[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 		})
 			.then(function (docRef) {
@@ -127,10 +139,13 @@ rhit.FbPicsManager = class {
 			})
 	}
 	beginListening(changeListener) {
-		this._unsubscribe = this._ref
-			.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc")
+		let query = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50);
+		if (this._uid) {
+			query = query.where(rhit.FB_KEY_AUTHOR, "==", this._uid);
+		}
+		this._unsubscribe = query
 			.onSnapshot((querySnapshot) => {
-				console.log("Pics Update");
+				console.log("Pic update");
 				this._documentSnapshots = querySnapshot.docs;
 				// querySnapshot.forEach((doc) => {
 				// 	console.log(doc.data());
@@ -139,6 +154,19 @@ rhit.FbPicsManager = class {
 					changeListener();
 				}
 			});
+
+		// this._unsubscribe = this._ref
+		// 	.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc")
+		// 	.onSnapshot((querySnapshot) => {
+		// 		console.log("Pics Update");
+		// 		this._documentSnapshots = querySnapshot.docs;
+		// 		// querySnapshot.forEach((doc) => {
+		// 		// 	console.log(doc.data());
+		// 		// });
+		// 		if (changeListener) {
+		// 			changeListener();
+		// 		}
+		// 	});
 	}
 	stopListening() {
 		this._unsubscribe();
@@ -184,6 +212,10 @@ rhit.DetailPageController = class {
 			document.querySelector("#inputUrl").focus();
 		})
 
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			rhit.fbAuthManager.signOut();
+		}
+
 
 
 		document.querySelector("#submitDeleteUrl").onclick = (event) => {
@@ -191,7 +223,7 @@ rhit.DetailPageController = class {
 
 			rhit.fbSinglePicManager.delete().then(function () {
 				console.log("deleted");
-				window.location.href = "/";
+				window.location.href = "/list.html";
 			}).catch(function (error) {
 				console.log("error deleting document");
 			});
@@ -210,6 +242,11 @@ rhit.DetailPageController = class {
 		// document.querySelector(".caption").innerHTML = rhit.fbSinglePicManager.caption;
 		document.querySelector(".pin").innerHTML = `<img src="${rhit.fbSinglePicManager.pic}" alt="${rhit.fbSinglePicManager.caption} class=".img-fluid">
 		<p class="caption">${rhit.fbSinglePicManager.caption}</p>`;
+
+		if (rhit.fbSinglePicManager.author == rhit.fbAuthManager.uid) {
+			document.querySelector("#menuEdit").style.display = "flex";
+			document.querySelector("#menuDelete").style.display = "flex";
+		}
 	}
 }
 
@@ -264,6 +301,10 @@ rhit.FbSinglePicManager = class {
 
 	get caption() {
 		return this._documentSnapshot.get(rhit.FB_KEY_CAPTION);
+	}
+
+	get author() {
+		return this._documentSnapshot.get(rhit.FB_KEY_AUTHOR);
 	}
 
 	delete() {
@@ -374,14 +415,14 @@ rhit.startFirebaseUI = function() {
 }
 
 rhit.checkForRedirects = function () {
-	if (document.querySelector("#loginPage") && rhit.FbAuthManager.isSignedIn) {
+	if (document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn) {
 		window.location.href = "/list.html";
 	}
 
 	// console.log(!document.querySelector("#loginPage"));
 	// console.log("runs");
 
-	if (!document.querySelector("#loginPage") && !rhit.FbAuthManager.isSignedIn) {
+	if (!document.querySelector("#loginPage") && !rhit.fbAuthManager.isSignedIn) {
 		window.location.href = "/";
 	}
 }
@@ -394,14 +435,18 @@ rhit.checkForRedirects = function () {
 rhit.main = function () {
 	console.log("Ready");
 
-	rhit.FbAuthManager = new rhit.FbAuthManager();
-	rhit.FbAuthManager.beginListening(() => {
+	rhit.fbAuthManager = new rhit.FbAuthManager();
+	rhit.fbAuthManager.beginListening(() => {
 		rhit.checkForRedirects();
 	});
 
 	if (document.querySelector("#listPage")) {
 		console.log("list page");
-		rhit.fbPicsManager = new rhit.FbPicsManager();
+
+		const urlParams = new URLSearchParams(window.location.search);
+		const uid = urlParams.get("uid");
+
+		rhit.fbPicsManager = new rhit.FbPicsManager(uid);
 		new rhit.ListPageController();
 
 	}
@@ -432,7 +477,7 @@ rhit.main = function () {
 	if (document.querySelector("#loginPage")) {
 
 		document.querySelector("#rosefireButton").onclick = (event) => {
-			rhit.FbAuthManager.signIn();
+			rhit.fbAuthManager.signIn();
 		}
 		rhit.startFirebaseUI();
 	}

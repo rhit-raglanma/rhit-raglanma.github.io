@@ -12,7 +12,7 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">Photo</a>
+    <a class="navbar-brand" href="/list.html">Photo</a>
 
     <!--Dropdown primary-->
     <div class="dropdown">
@@ -25,10 +25,12 @@
 
       <!--Menu-->
       <div class="dropdown-menu dropdown-primary">
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editUrlDialog"><i
+        <a id="menuEdit" class="dropdown-item" href="#" data-toggle="modal" data-target="#editUrlDialog"><i
             class="material-icons">edit</i>&nbsp;&nbsp;&nbsp;Edit</a>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteUrlDialog"><i
+        <a id="menuDelete" class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteUrlDialog"><i
             class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</a>
+        <a id="menuSignOut" class="dropdown-item" href="#" data-toggle="modal"><i
+            class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Log Out</a>
       </div>
     </div>
     <!--/Dropdown primary-->
