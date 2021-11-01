@@ -1,0 +1,22 @@
+body {
+    background: #800000;
+}
+.button-group {
+    text-align: center;
+    /* border: gray solid 5px; */
+    padding: 5vw;
+    /* margin: 10px; */
+}
+
+.button-group > button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+div:nth-child(2) {
+    color: white;
+    font-family: "Consolas";
+    text-align: center;
+    font-size: 4em;
+}
