@@ -47,6 +47,12 @@ app.get("/hello", function(req, res) {
 
 });
 
+app.get("/goodbye", function(req, res) {
+
+    res.send("<h1>Goodbye!</h1>")
+
+});
+
 app.post("/users/:username", function(req, res) {
     let username = req.params.username;
     res.send(username);
