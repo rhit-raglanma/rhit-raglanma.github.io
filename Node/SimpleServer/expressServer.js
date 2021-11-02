@@ -1,10 +1,40 @@
 var express = require("express");
 var app = express();
 
+let data=[];
 let counter = 0;
 
-app.use('/static', express.static("public"));
+const fs = require("fs");
+const serverSideStorage = "../data/db.json"
 
+
+fs.readFile(serverSideStorage, function(err, buf) {
+    if (err) {
+        console.log("error: ", err);
+    } else {
+        data = JSON.parse(buf.toString());
+        if (data.length != 0) {
+            counter = data[data.length-1];
+        }
+    }
+    console.log("data read from file");
+});
+
+function saveToServer(data) {
+    fs.writeFile(serverSideStorage, JSON.stringify(data), function(err, buf) {
+        if (err) {
+            console.log("error: ", err);
+        } else {
+            console.log("data saved");
+        }
+    });
+}
+
+
+
+
+app.use('/static', express.static("public"));
+ 
 app.get("/hello", function(req, res) {
 
     let name = req.query.name;
@@ -47,13 +77,19 @@ app.use('/pug/hello', bodyParser.urlencoded({extended: false}));
 
 // appendFile
 
+
 app.post('/pug/hello', function(req, res) {
     counter = req.body.count || counter;
+    data.push(counter);
+    saveToServer(data);
 
     res.render('hello', {title: "Hello Button", count: counter});
 
 });
 
-
+app.get('/pug/history', function(req, res) {
+    res.render('history', {title: 'Count history', data: data});
+    
+});
 
 app.listen(3000);
