@@ -35,14 +35,17 @@ app.get('/pug/', function(req, res) {
 });
 
 app.get('/pug/hello', function(req, res) {
-    res.render('index', {title: 'Hey', count: counter});
+    res.render('hello', {title: 'Hey', count: counter});
     
 });
 
 var bodyParser = require("body-parser");
-const { appendFile } = require("fs");
 
-appendFile
+app.use('/pug/hello', bodyParser.urlencoded({extended: false}));
+
+// const { appendFile } = require("fs");
+
+// appendFile
 
 app.post('/pug/hello', function(req, res) {
     counter = req.body.count || counter;

@@ -4,7 +4,7 @@
   "description": "using no express server",
   "main": "noExpress.js",
   "scripts": {
-    "start": "node expressServer.js",
+    "start": "nodemon expressServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
