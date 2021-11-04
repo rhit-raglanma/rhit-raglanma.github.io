@@ -54,7 +54,7 @@ rhit.pageController = class {
 			// 	console.log(data);
 			// });
 
-			fetch(`/api/getmove/${boardString}`)
+			fetch(`http://localhost:5001/raglanma-cloudfunctions/us-central1/api/getmove/${boardString}`)
 				.then(response => response.json())
 				.then(data => {
 					//console.log(data.move);
