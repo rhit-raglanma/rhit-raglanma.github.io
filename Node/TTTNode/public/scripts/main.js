@@ -45,6 +45,25 @@ rhit.pageController = class {
 			square.innerHTML = this.game.board[index];
 		});
 		document.querySelector("#gameStateText").innerHTML = this.game.state;
+
+		if (this.game.isOTurn) {
+			const boardString = this.game.boardString;
+			// fetch(`/api/getmove/${boardString}`).then((response) => {
+			// 	return response.json();
+			// }).then((data) => {
+			// 	console.log(data);
+			// });
+
+			fetch(`/api/getmove/${boardString}`)
+				.then(response => response.json())
+				.then(data => {
+					//console.log(data.move);
+					this.game.pressedButtonAtIndex(data.move);
+					this.UpdateView();
+				});
+
+		}
+
 	}
 }
 
@@ -76,8 +95,8 @@ rhit.Game = class {
 
 	pressedButtonAtIndex(buttonIndex) {
 		//this.board[buttonIndex] = rhit.Game.Mark.X;
-		if (this.state == rhit.Game.State.X_WIN || 
-			this.state == rhit.Game.State.O_WIN || 
+		if (this.state == rhit.Game.State.X_WIN ||
+			this.state == rhit.Game.State.O_WIN ||
 			this.state == rhit.Game.State.TIE) {
 			return;
 		}
@@ -90,7 +109,7 @@ rhit.Game = class {
 		} else {
 			this.board[buttonIndex] = rhit.Game.Mark.O;
 			this.state = rhit.Game.State.X_TURN;
-			
+
 		}
 		this._checkForGameOver();
 
@@ -113,7 +132,7 @@ rhit.Game = class {
 		linesOf3.push(this.board[2] + this.board[5] + this.board[8]);
 
 		linesOf3.push(this.board[0] + this.board[4] + this.board[8]);
-		linesOf3.push(this.board[2] + this.board[1] + this.board[6]);
+		linesOf3.push(this.board[2] + this.board[4] + this.board[6]);
 
 		for (const lineOf3 of linesOf3) {
 			if (lineOf3 == "XXX") {
@@ -131,6 +150,23 @@ rhit.Game = class {
 	getState() {
 		return this.state;
 	}
+
+	get isOTurn() {
+		return this.state == rhit.Game.State.O_TURN;
+	}
+
+	get boardString() {
+		let boardString = "";
+		for (let k = 0; k < 9; k++) {
+			if (this.board[k] == rhit.Game.Mark.NONE) {
+				boardString += "-";
+			} else {
+				boardString += this.board[k];
+			}
+		}
+		return boardString;
+	}
+
 }
 
 /* Main */
@@ -147,7 +183,7 @@ rhit.main = function () {
 	// console.log('this.board = ', myGame.board);
 	// console.log('this.state = ', myGame.state);
 
-	
+
 };
 
 rhit.main();
