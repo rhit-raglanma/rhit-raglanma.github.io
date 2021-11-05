@@ -50,8 +50,12 @@ function saveToServer(data) {
 
 app.post("/api/admin/add", (req, res) => {
 
+    console.log(req.body);
+
     data.push(req.body.word);
     saveToServer(data);
+
+
 
     res.send({"word": req.body.word, "index": data.length-1});
 
@@ -155,6 +159,9 @@ app.delete("/api/admin/word/:id", (req, res) => {
 
 // TODO: Add your code here.
 
+app.get("/api/player/numwords", (req, res) => {
+    res.send({"length": data.length});
+});
 
 /**
  *  Word Length - Get the length of a single word at the given index.
@@ -167,6 +174,10 @@ app.delete("/api/admin/word/:id", (req, res) => {
 
 // TODO: Add your code here.
 
+app.get("/api/player/wordlength/:id", (req, res) => {
+    const index = req.params.id;
+    res.send({"length": data[index].length});
+});
 
 /**
  *  Guess - Allow the player to make a guess and return where that letter is found in the word.
@@ -182,7 +193,21 @@ app.delete("/api/admin/word/:id", (req, res) => {
 
 // TODO: Add your code here.
 
+app.get("/api/player/guess/:id/:letter", (req, res) => {
+    const index = req.params.id;
+    const letter = req.params.letter;
 
+    const word = data[index];
+    const locations = [];
+
+    for (let i = 0; i < word.length; i++) {
+        if (word[i].toUpperCase() == letter.toUpperCase()) {
+            locations.push(i);
+        }
+    }
+
+    res.send({"letter": letter, "length": word.length, "index": index, "locations": locations})
+})
 
 
 app.listen(3000);
