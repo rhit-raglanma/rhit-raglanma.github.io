@@ -44,14 +44,27 @@ rhit.AdminController = class {
 		};
 	}
 
-	add(word) {
-		if (!word) {
+	add(addedWord) {
+		if (!addedWord) {
 			console.log("No word provided.  Ignoring request.");
 			return;
 		}
-		console.log(`TODO: Add the word ${word} to the backend`);
+		console.log(`TODO: Add the word ${addedWord} to the backend`);
 
 		// TODO: Add your code here.
+
+		console.log(addedWord);
+
+
+
+		fetch(`/api/admin/add`, {
+
+			method: "POST",
+			headers: { 'Content-Type': 'application/json' },
+			//headers: { "Content-Type": 'application/json' },
+			body: JSON.stringify({ "word": addedWord })
+		});
+
 
 	}
 
@@ -60,8 +73,18 @@ rhit.AdminController = class {
 
 		// TODO: Add your code here.
 
+		fetch(`/api/admin/words`)
+			.then(response => response.json())
+			.then(data => {
+				document.querySelector("#readAllOutput").innerHTML = data.words;
+
+			});
+
+
 		// Hint for something you will need later in the process (after backend call(s))
-		document.querySelector("#readAllOutput").innerHTML = "Results go here."
+
+
+
 	}
 
 	readSingle(index) {
@@ -73,8 +96,17 @@ rhit.AdminController = class {
 
 		// TODO: Add your code here.
 
+
+		fetch(`/api/admin/word/${index}`)
+			.then(response => response.json())
+			.then(data => {
+				document.querySelector("#readSingleOutput").innerHTML = data.word;
+
+			});
+
+
 		// Hint for something you will need later in the process (after backend call(s))
-		document.querySelector("#readSingleOutput").innerHTML = "Result goes here"
+
 	}
 
 	update(index, word) {
@@ -90,6 +122,13 @@ rhit.AdminController = class {
 
 		// TODO: Add your code here.
 
+		fetch(`/api/admin/word/${index}`, {
+
+			method: "PUT",
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ "word": word })
+		});
+
 	}
 
 	delete(index) {
@@ -101,12 +140,30 @@ rhit.AdminController = class {
 
 		// TODO: Add your code here.
 
+		fetch(`/api/admin/word/${index}`, {
+
+			method: "DELETE",
+			headers: { 'Content-Type': 'application/json' },
+			//body: JSON.stringify({"word": word})
+		});
+
 	}
 }
 
 rhit.PlayerController = class {
+
+
+
+
 	constructor() {
 		// Note to students, you can declare instance variables here (or later) to track the state for the game in progress.
+
+		this.numWords = 0
+		this.wordLength = 0;
+		this.index = 0;
+		this.misses = "";
+		this.hits;
+		this.typed = [];
 
 		// Connect the Keyboard inputs
 		const keyboardKeys = document.querySelectorAll(".key");
@@ -119,6 +176,7 @@ rhit.PlayerController = class {
 		document.querySelector("#newGameButton").onclick = (event) => {
 			this.handleNewGame();
 		}
+
 		this.handleNewGame(); // Start with a new game.
 	}
 
@@ -127,12 +185,77 @@ rhit.PlayerController = class {
 
 		// TODO: Add your code here.
 
+		this.misses = "";
+		this.hits = "";
+		this.typed = [];
+
+
+
+		fetch(`/api/player/numwords`)
+			.then(response => response.json())
+			.then(data => {
+				this.numWords = data.length;
+
+
+				this.index = Math.floor(Math.random() * this.numWords);
+
+
+				fetch(`/api/player/wordlength/${this.index}`)
+					.then(response => response.json())
+					.then(data => {
+						this.wordLength = data.length;
+
+
+
+
+						for (let i = 0; i < this.wordLength; i++) {
+							this.hits = this.hits + '_';
+
+						}
+						console.log(this.hits);
+
+						this.updateView();
+
+
+
+					});
+
+			});
+
+
+
+
+
 	}
+
+
 
 	handleKeyPress(keyValue) {
 		console.log(`You pressed the ${keyValue} key`);
 
 		// TODO: Add your code here.
+
+		fetch(`/api/player/guess/${this.index}/${keyValue}`)
+			.then(response => response.json())
+			.then(data => {
+				let locations = data.locations;
+				if (locations.length == 0) {
+					this.misses = this.misses + keyValue;
+					console.log("miss ", this.misses)
+				} else {
+					for (let i = 0; i < locations.length; i++) {
+						const j = locations[i]
+
+						this.hits = this.hits.substring(0, locations[i]) + keyValue + this.hits.substring(locations[i] + 1, this.hits.length);
+					}
+					console.log("hit ", this.hits);
+				}
+				this.typed.push(keyValue);
+				console.log(this.typed);
+				this.updateView();
+
+
+			});
 
 	}
 
@@ -141,18 +264,35 @@ rhit.PlayerController = class {
 		// TODO: Add your code here.
 
 
+		document.querySelector("#displayWord").innerHTML = this.hits;
+
+
+		document.querySelector("#incorrectLetters").innerHTML = this.misses;
+
+
+
 		// Some hints to help you with updateView.
 		// 	document.querySelector("#displayWord").innerHTML = "____";
 		// 	document.querySelector("#incorrectLetters").innerHTML = "ABCDE";
 
-		// 	const keyboardKeys = document.querySelectorAll(".key");
-		// 	for (const keyboardKey of keyboardKeys) {
-		// 		if (some condition based on keyboardKey.dataset.key) {
-		// 			keyboardKey.style.visibility = "hidden";
-		// 		} else {
-		// 			keyboardKey.style.visibility = "initial";
-		// 		}
-		// 	}
+		const keyboardKeys = document.querySelectorAll(".key");
+		for (const keyboardKey of keyboardKeys) {
+
+			let b = false;
+
+
+			for (const key of this.typed) {
+				if (key == keyboardKey.dataset.key) {
+					b = true;
+				}
+			}
+
+			if (b) {
+				keyboardKey.style.visibility = "hidden";
+			} else {
+				keyboardKey.style.visibility = "initial";
+			}
+		}
 	}
 }
 
